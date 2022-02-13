@@ -6,4 +6,5 @@
     <color name="color_secondary_variant">#FA5855</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#7CB342</color>
 </resources>

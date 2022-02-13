@@ -16,4 +16,16 @@
             />
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_game"
+        android:name="com.babbeltest.fallingwords.ui.game.GameFragment"
+        android:label="@string/text_game"
+        tools:layout="@layout/fragment_game">
+
+        <action
+            android:id="@+id/action_navigate_game_to_home"
+            app:destination="@id/navigation_home" />
+
+    </fragment>
+
 </navigation>
