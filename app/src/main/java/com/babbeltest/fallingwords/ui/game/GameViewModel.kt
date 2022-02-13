@@ -1,10 +1,18 @@
 package com.babbeltest.fallingwords.ui.game
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.babbeltest.fallingwords.App
+import com.babbeltest.fallingwords.Const.CORRECT_MATCH
+import com.babbeltest.fallingwords.Const.INCORRECT_MATCH
 import com.babbeltest.fallingwords.base.BaseNavigation
 import com.babbeltest.fallingwords.base.BaseViewModel
 import com.babbeltest.fallingwords.repositories.WordDataRepository
+import com.babbeltest.fallingwords.util.DeviceUtil
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 /**
@@ -18,17 +26,81 @@ class GameViewModel @Inject constructor(
     var fallingWord = MutableLiveData<String>().apply { value =  ""}
     var scoreTxt = MutableLiveData<String>().apply { value = "0" }
 
+    private var _hasGameStarted = MutableLiveData<Boolean>().apply { value = false }
+    val hasGameStarted : LiveData<Boolean> get() = _hasGameStarted
+
+    private var _isGameOver = MutableLiveData<Boolean>().apply { value = false }
+    val isGameOver : LiveData<Boolean> get() = _isGameOver
+
+    var scoreCount = 0
+    var wordCount = 0
+
+    var isMatching = false
+    var isFromNoResponse = false
+
+    @SuppressLint("CheckResult")
     override fun load() {
 
+        if(wordCount == 10){
+            _isGameOver.value = true
+        }
+        else{
+            wordCount++
+            isFromNoResponse = false
+            wordDataRepository.getWords()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { result ->
+
+                    if(isMatchingTranslation()){
+                        val randomWordItem = result[result.indices.random()]
+                        setWord.value = randomWordItem.textEng
+                        fallingWord.value = randomWordItem.textSpa
+                        isMatching = true
+                    }else{
+
+                        val randomEnglishWord = result[result.indices.random()].textEng
+                        val randomSpanishWord = result[result.indices.random()].textSpa
+                        setWord.value = randomEnglishWord
+                        fallingWord.value = randomSpanishWord
+                        isMatching = false
+                    }
+
+                    _hasGameStarted.value = true
+                }
+        }
+    }
+
+    private fun isMatchingTranslation() : Boolean{
+
+        return (CORRECT_MATCH..INCORRECT_MATCH).random() == CORRECT_MATCH
+    }
+
+    fun setNoResponse(noResponse : Boolean){
+        isFromNoResponse = noResponse
     }
 
     fun onMatchClicked(){
+        _hasGameStarted.value = false
+        if(isMatching){
+            scoreCount++
+        }
 
+        scoreTxt.value = scoreCount.toString()
+        load()
     }
 
     fun onNoMatchClicked(){
+        _hasGameStarted.value = false
 
+        if(!isMatching && !isFromNoResponse){
+            scoreCount++
+        }
+        scoreTxt.value = scoreCount.toString()
+        load()
     }
+
+    fun getScreenHeight(activity: Activity) = DeviceUtil.getScreenHeight(activity)
 
     override fun onBackPressed(){
         baseNavigation.value = BaseNavigation.NavigateTo(directions =
