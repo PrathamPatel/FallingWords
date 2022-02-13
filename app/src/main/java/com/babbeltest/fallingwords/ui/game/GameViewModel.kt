@@ -35,6 +35,9 @@ class GameViewModel @Inject constructor(
     var scoreCount = 0
     var wordCount = 0
 
+    var noResponseCount = 0
+    var incorrectCount = 0
+
     var isMatching = false
     var isFromNoResponse = false
 
@@ -71,12 +74,13 @@ class GameViewModel @Inject constructor(
         }
     }
 
-    private fun isMatchingTranslation() : Boolean{
-
-        return (CORRECT_MATCH..INCORRECT_MATCH).random() == CORRECT_MATCH
+    fun transitionToResults(){
+        baseNavigation.value = BaseNavigation.NavigateTo(
+            directions = GameFragmentDirections.actionNavigateGameToResult(scoreCount, noResponseCount, incorrectCount))
     }
 
     fun setNoResponse(noResponse : Boolean){
+        noResponseCount++
         isFromNoResponse = noResponse
     }
 
@@ -84,6 +88,8 @@ class GameViewModel @Inject constructor(
         _hasGameStarted.value = false
         if(isMatching){
             scoreCount++
+        }else{
+            incorrectCount++
         }
 
         scoreTxt.value = scoreCount.toString()
@@ -96,11 +102,16 @@ class GameViewModel @Inject constructor(
         if(!isMatching && !isFromNoResponse){
             scoreCount++
         }
+        else if(isMatching && !isFromNoResponse){
+            incorrectCount++
+        }
         scoreTxt.value = scoreCount.toString()
         load()
     }
 
     fun getScreenHeight(activity: Activity) = DeviceUtil.getScreenHeight(activity)
+
+    private fun isMatchingTranslation() = (CORRECT_MATCH..INCORRECT_MATCH).random() == CORRECT_MATCH
 
     override fun onBackPressed(){
         baseNavigation.value = BaseNavigation.NavigateTo(directions =

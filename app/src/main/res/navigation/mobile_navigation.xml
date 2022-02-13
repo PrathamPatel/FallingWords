@@ -26,6 +26,42 @@
             android:id="@+id/action_navigate_game_to_home"
             app:destination="@id/navigation_home" />
 
+        <action
+            android:id="@+id/action_navigate_game_to_result"
+            app:destination="@id/navigation_result"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_result"
+        android:name="com.babbeltest.fallingwords.ui.results.ResultFragment"
+        android:label="@string/text_result"
+        tools:layout="@layout/fragment_result">
+
+        <argument
+            android:name="gameScore"
+            app:argType="integer"
+            />
+
+        <argument
+            android:name="noResponse"
+            app:argType="integer"
+            />
+
+        <argument
+            android:name="incorrectResponse"
+            app:argType="integer"
+            />
+
+        <action
+            android:id="@+id/action_navigate_game_to_home"
+            app:destination="@id/navigation_home"
+            />
+
+        <action
+            android:id="@+id/action_navigate_result_to_game"
+            app:destination="@id/navigation_game"
+            />
     </fragment>
 
 </navigation>

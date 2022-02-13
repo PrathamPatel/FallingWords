@@ -9,4 +9,9 @@
     <string name="text_match">MATCH</string>
     <string name="text_no_match">NO MATCH</string>
     <string name="text_score">Score:</string>
+
+    <string name="text_final_score">Final Score:</string>
+    <string name="text_quit">QUIT</string>
+    <string name="text_restart">RESTART</string>
+    <string name="text_result">RESULT</string>
 </resources>

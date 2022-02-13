@@ -58,6 +58,7 @@ class GameFragment : BaseFragment<GameViewModel>() {
                 binding.tvFallingWord.clearAnimation()
                 binding.tvFallingWord.visibility = View.GONE
                 binding.tvSetWord.visibility = View.GONE
+                viewModel.transitionToResults()
             }
         }
     }
