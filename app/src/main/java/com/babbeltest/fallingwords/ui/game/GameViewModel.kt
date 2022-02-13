@@ -55,21 +55,24 @@ class GameViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { result ->
 
-                    if(isMatchingTranslation()){
-                        val randomWordItem = result[result.indices.random()]
-                        setWord.value = randomWordItem.textEng
-                        fallingWord.value = randomWordItem.textSpa
-                        isMatching = true
+                    if(!result.isNullOrEmpty()){
+                        if(isMatchingTranslation()){
+                            val randomWordItem = result[result.indices.random()]
+                            setWord.value = randomWordItem.textEng
+                            fallingWord.value = randomWordItem.textSpa
+                            isMatching = true
+                        }else{
+
+                            val randomEnglishWord = result[result.indices.random()].textEng
+                            val randomSpanishWord = result[result.indices.random()].textSpa
+                            setWord.value = randomEnglishWord
+                            fallingWord.value = randomSpanishWord
+                            isMatching = false
+                        }
+                        _hasGameStarted.value = true
                     }else{
-
-                        val randomEnglishWord = result[result.indices.random()].textEng
-                        val randomSpanishWord = result[result.indices.random()].textSpa
-                        setWord.value = randomEnglishWord
-                        fallingWord.value = randomSpanishWord
-                        isMatching = false
+                        onBackPressed()
                     }
-
-                    _hasGameStarted.value = true
                 }
         }
     }
