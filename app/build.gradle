@@ -1,0 +1,78 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
+    id 'kotlin-parcelize'
+}
+android {
+    compileSdk 31
+
+    defaultConfig {
+        applicationId "com.babbeltest.fallingwords"
+        minSdk 26
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11
+    }
+
+    buildFeatures{
+        dataBinding  true // for data binding
+        viewBinding  true // for view binding
+    }
+    kapt {
+        correctErrorTypes = true
+    }
+}
+
+dependencies {
+
+    implementation "androidx.core:core-ktx:$androidx_core"
+    implementation "androidx.appcompat:appcompat:$androidx_compat"
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.constraintlayout:constraintlayout:$androidx_constraint_layout"
+
+    //Lifecycle
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecyle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecyle"
+    implementation "androidx.lifecycle:lifecycle-extensions:$androidx_life_cycle_extentions"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-runtime-ktx:$navigation"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation"
+
+    //Dagger 2 proguarded
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    //RX
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin"
+
+    //GSON
+    implementation "com.google.code.gson:gson:$gson"
+    
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_kotlin"
+    testImplementation "org.mockito:mockito-inline:$mockito_inline"
+    testImplementation "junit:junit:$junit"
+    testImplementation "androidx.arch.core:core-testing:$core_testing"
+    androidTestImplementation "androidx.test.ext:junit:$junit_ext"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
+}

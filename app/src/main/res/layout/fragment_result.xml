@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="varViewModel"
+            type="com.babbeltest.fallingwords.ui.results.ResultViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
+
+        <TextView
+            android:id="@+id/tv_stats"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_primary"
+            android:gravity="start"
+            android:layout_margin="@dimen/margin_medium2"
+            android:text="@={varViewModel.statsTxt}"
+            android:layout_marginStart="@dimen/margin_medium1"
+            android:layout_marginEnd="@dimen/margin_medium1"
+            android:fontFamily="monospace"
+            android:textSize="@dimen/textsize_medium3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clyt_score"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/tv_score_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="@string/text_final_score"
+                android:layout_marginStart="@dimen/margin_medium1"
+                android:layout_marginEnd="@dimen/margin_medium1"
+                android:fontFamily="sans-serif-black"
+                android:textSize="@dimen/textsize_medium4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:text="@={varViewModel.finalScoreTxt}"
+                android:fontFamily="sans-serif-black"
+                android:textSize="@dimen/textsize_large3"
+                tools:text="10 / 10"
+                app:layout_constraintTop_toBottomOf="@id/tv_score_header"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_score_header"
+                app:layout_constraintEnd_toEndOf="@id/tv_score_header"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_wrong"
+            android:layout_width="@dimen/view_size_large2"
+            android:layout_height="@dimen/view_size_large2"
+            android:backgroundTint="@color/color_secondary_variant"
+            android:fontFamily="@font/chewey"
+            android:layout_marginTop="@dimen/margin_medium1"
+            android:layout_marginStart="@dimen/margin_medium5"
+            android:text="@string/text_quit"
+            android:onClick="@{() -> varViewModel.onQuitClicked()}"
+            android:textSize="@dimen/textsize_medium4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clyt_score"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
+            style="@style/Widget.Material3.Button.Icon"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_correct"
+            android:layout_width="@dimen/view_size_large2"
+            android:layout_height="@dimen/view_size_large2"
+            android:backgroundTint="@color/green"
+            android:fontFamily="@font/chewey"
+            android:text="@string/text_restart"
+            android:textSize="@dimen/textsize_medium4"
+            android:onClick="@{() -> varViewModel.onRestartClicked()}"
+            android:layout_marginEnd="@dimen/margin_medium5"
+            app:layout_constraintTop_toTopOf="@id/btn_wrong"
+            app:layout_constraintBottom_toBottomOf="@id/btn_wrong"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Circle"
+            style="@style/Widget.Material3.Button.Icon"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

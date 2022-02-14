@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--LINE SPACING-->
+    <dimen name="line_spacing">-25dp</dimen>
+
+    <!--ITEM SIZE-->
+    <dimen name="view_size_large1">80dp</dimen>
+    <dimen name="view_size_large2">128dp</dimen>
+    <dimen name="view_size_large3">190dp</dimen>
+
+    <!--TEXT SIZES-->
+    <dimen name="textsize_small1">10sp</dimen>
+    <dimen name="textsize_small2">12sp</dimen>
+
+    <dimen name="textsize_medium1">16sp</dimen>
+    <dimen name="textsize_medium2">18sp</dimen>
+    <dimen name="textsize_medium3">22sp</dimen>
+    <dimen name="textsize_medium4">24sp</dimen>
+
+    <dimen name="textsize_large0">28sp</dimen>
+    <dimen name="textsize_large1">32sp</dimen>
+    <dimen name="textsize_large2">45sp</dimen>
+    <dimen name="textsize_large3">75sp</dimen>
+
+    <!--MARGIN-->
+    <dimen name="margin_small0">5dp</dimen>
+    <dimen name="margin_small1">10dp</dimen>
+
+    <dimen name="margin_medium1">15dp</dimen>
+    <dimen name="margin_medium2">16dp</dimen>
+    <dimen name="margin_medium3">25dp</dimen>
+    <dimen name="margin_medium4">40dp</dimen>
+    <dimen name="margin_medium5">45dp</dimen>
+
+    <dimen name="margin_large0">70dp</dimen>
+
+</resources>
