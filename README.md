@@ -30,3 +30,4 @@ Should there have been more time, I would like to have made the following decisi
 1. Add different levels of difficulty with speed of the falling word increasing with each difficulty level.
 2. Add and improve current unit tests and add intrumented (UI) tests.
 3. Improve my code base and try make it more generic, for example, making custom views for the buttons and only changing properties.
+4. Probably add some more analytics such as, average response times, to better get to know the player and learning pace.
